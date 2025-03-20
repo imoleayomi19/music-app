@@ -1,0 +1,80 @@
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container */
+.music-app {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Song List */
+.songs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Song Card */
+.song-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Song Info */
+.song-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.song-artist {
+  font-size: 14px;
+  color: #666;
+  margin: 4px 0 0;
+}
+
+/* Play Button */
+.play-button {
+  background: #007bff;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.play-button:hover {
+  background: #0056b3;
+}
+
+.play-button svg {
+  width: 20px;
+  height: 20px;
+}

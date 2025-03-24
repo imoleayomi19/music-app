@@ -28,9 +28,8 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-image: url(./assets/music-image.png);
-  background-repeat: no-repeat;
-  background-size: contain;
+  background-image: linear-gradient(to right,
+  rgba(200,8,207,0.75), rgba(28,70,184,0.8)),   url(./assets/musical-background_png.avif);
 }
 
 h1 {

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Play, Pause } from "lucide-react";
 import "./App.css";
 
-export default function MusicApp() {
+export default function App() {
   const [songs, setSongs] = useState([]);
   const [playing, setPlaying] = useState(null);
   const [audio, setAudio] = useState(null);
@@ -17,14 +17,13 @@ export default function MusicApp() {
 
   const playSong = (url, id) => {
     if (playing === id) {
-      // Pause the current audio and reset state
+      // If the same song is playing, pause it
       if (audio) {
         audio.pause();
-        audio.currentTime = 0;
+        setPlaying(null);
       }
-      setPlaying(null);
     } else {
-      // Stop any currently playing song
+      // Stop currently playing audio
       if (audio) {
         audio.pause();
         audio.currentTime = 0;
@@ -32,18 +31,21 @@ export default function MusicApp() {
 
       // Create a new audio instance
       const newAudio = new Audio(url);
-      newAudio.volume = 1.0; // Ensure volume is set properly
+      newAudio.volume = 1.0;
 
+      // Try playing the song
       newAudio
         .play()
         .then(() => {
-          setAudio(newAudio); // Store the new audio instance
-          setPlaying(id); // Mark the current song as playing
+          setAudio(newAudio); // Save the new audio instance
+          setPlaying(id); // Mark song as playing
         })
         .catch((error) => console.error("Error playing audio:", error));
 
-      // When the song ends, reset the playing state
-      newAudio.onended = () => setPlaying(null);
+      // Reset playing state when the song ends
+      newAudio.onended = () => {
+        setPlaying(null);
+      };
     }
   };
 

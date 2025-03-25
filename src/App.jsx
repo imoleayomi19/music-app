@@ -66,25 +66,55 @@ export default function App() {
   };
 
   return (
-    <div className="music-app">
-      <h1 className="title">Music App</h1>
-      {error && <p className="error-message">{error}</p>}
-      <div className="songs-list">
-        {songs.map((song) => (
-          <div key={song.id} className="song-card">
-            <div className="song-info">
-              <h2 className="song-title">{song.songTitle}</h2>
-              <p className="song-artist">{song.artistName}</p>
-            </div>
-            <button
-              onClick={() => playSong(song.songUrl, song.id)}
-              className="play-button"
-            >
-              {playing === song.id ? <Pause size={20} /> : <Play size={20} />}
-            </button>
-          </div>
-        ))}
+    <section>
+      <div className="header">
+        <div className="title-container">
+          <img className="title-img" src="./src/assets/title-img.jpg" />
+          <h1 className="title">
+            <i>Listen</i> to music.
+          </h1>
+        </div>
+        <div className="nav-bar">
+          <a href="#" className="nav-link">
+            Home
+          </a>
+          <a href="#" className="nav-link">
+            About
+          </a>
+          <a href="#" className="nav-link">
+            Contact
+          </a>
+        </div>
+        <div>
+          <a className="right-link" href="#">
+            Login
+          </a>
+          /
+          <a className="right-link" href="#">
+            Sign Up
+          </a>
+        </div>
       </div>
-    </div>
+      <div className="music-app">
+        <p className="play-list">PlayList</p>
+        {error && <p className="error-message">{error}</p>}
+        <div className="songs-list">
+          {songs.map((song) => (
+            <div key={song.id} className="song-card">
+              <div className="song-info">
+                <h2 className="song-title">{song.songTitle}</h2>
+                <p className="song-artist">{song.artistName}</p>
+              </div>
+              <button
+                onClick={() => playSong(song.songUrl, song.id)}
+                className="play-button"
+              >
+                {playing === song.id ? <Pause size={20} /> : <Play size={20} />}
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

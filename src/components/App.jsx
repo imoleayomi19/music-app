@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Play, Pause } from "lucide-react";
-import "./App.css";
+import "../components/App.css";
 
 export default function App() {
   const [songs, setSongs] = useState([]);

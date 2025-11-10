@@ -68,32 +68,8 @@ export default function App() {
   return (
     <section>
       <div className="header">
-        <div className="title-container">
-          <img className="title-img" src="./src/assets/title-img.jpg" />
-          <h1 className="title">
-            <i>Listen</i> to music.
-          </h1>
-        </div>
-        <div className="nav-bar">
-          <a href="#" className="nav-link">
-            Home
-          </a>
-          <a href="#" className="nav-link">
-            About
-          </a>
-          <a href="#" className="nav-link">
-            Contact
-          </a>
-        </div>
-        <div>
-          <a className="right-link" href="#">
-            Login
-          </a>
-          /
-          <a className="right-link" href="#">
-            Sign Up
-          </a>
-        </div>
+  
+       
       </div>
       <div className="music-app">
         <p className="play-list">PlayList</p>

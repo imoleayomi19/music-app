@@ -127,13 +127,17 @@ function Landpage() {
               </Link>
             </nav>
           </div>
-          <div className="auth-cont">
-              <Link to="/signup" className="auth-link signup-link">
-                SIGN UP
-              </Link>
-              <Link to="/login" className="auth-link login-link">
-                LOG IN
-              </Link>
+          <div className="media-cont">
+            {/* Social media icons can be added here */}
+            <a href="https://twitter.com/TuneTrail">
+              <img src="/src/assets/x-icon.png"  className="social-link"  aria-label="Twitter"/>
+            </a>
+            <a href=" https://www.instagram.com/tunetrail/" >
+              <img src="/src/assets/ig-icon.png" className="social-link" aria-label="Instagram" />
+            </a>
+            <a href=" https://www.facebook.com/TuneTrail" >
+              <img src="/src/assets/fb-icon.png" className="social-link" aria-label="Facebook" />
+            </a>
           </div>
         </div>
       </div>

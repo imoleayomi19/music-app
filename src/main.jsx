@@ -6,8 +6,8 @@ import "./components/style.css";
 
 import App from "./components/App.jsx";
 import Landpage from "./components/landpage.tsx";
-import Login from "./components/login.jsx";
-import Signup from "./components/signup.jsx";
+// import Login from "./components/login.jsx";
+// import Signup from "./components/signup.jsx";
 import ErrorBoundary from "./ErrorBoundary";
 
 function Root() {
@@ -18,8 +18,9 @@ function Root() {
           <Routes>
             <Route path="/" element={<Landpage />} />
             <Route path="/app" element={<App />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup  />} />
+            {/* <Route path="/about" element={<About />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/contact" element={<Contact  />} /> */}
           </Routes>
         </ErrorBoundary>
       </BrowserRouter>

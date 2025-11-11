@@ -6,7 +6,7 @@ function TrackPlayer({ src, title }) {
   const audioRef = useRef(null);
 
   useEffect(() => {
-    // create the audio element when component mounts
+    
     audioRef.current = new Audio(src);
     const a = audioRef.current;
     const onEnded = () => setPlaying(false);
@@ -48,11 +48,31 @@ function TrackPlayer({ src, title }) {
 function Landpage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState("idle"); // idle | sending | success | error
+  const [status, setStatus] = useState("idle");
+  const [sampleTracks, setSampleTracks] = useState([]);
+  const [tracksLoading, setTracksLoading] = useState(true);
 
   const handleListenNow = () => {
     navigate("/app");
   };
+
+  // Fetch first 3 songs from the API
+  useEffect(() => {
+    fetch("https://robo-music-api.onrender.com/music/my-api")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch songs");
+        return res.json();
+      })
+      .then((data) => {
+        // Take only the first 3 songs
+        setSampleTracks((data || []).slice(0, 3));
+        setTracksLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching sample tracks:", err);
+        setTracksLoading(false);
+      });
+  }, []);
 
   const validateEmail = (value) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -65,8 +85,7 @@ function Landpage() {
       return;
     }
 
-    // Try Formspree integration if endpoint is configured, otherwise simulate
-    const FORM_ENDPOINT = "https://formspree.io/f/yourFormId"; // replace yourFormId with your actual form id
+    const FORM_ENDPOINT = "https://formspree.io/f/yourFormId"; 
 
     setStatus("sending");
     if (!FORM_ENDPOINT.includes("yourFormId")) {
@@ -94,27 +113,6 @@ function Landpage() {
     }
   };
 
-  const sampleTracks = [
-    {
-      id: 1,
-      title: "Morning Flow",
-      artist: "TuneTrail",
-      url: "https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3",
-    },
-    {
-      id: 2,
-      title: "Evening Chill",
-      artist: "TuneTrail",
-      url: "https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_1MG.mp3",
-    },
-    {
-      id: 3,
-      title: "Night Drive",
-      artist: "TuneTrail",
-      url: "https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_2MG.mp3",
-    },
-  ];
-
   return (
     <div>
       <div className="head">
@@ -132,21 +130,21 @@ function Landpage() {
             </Link>
           </div>
           <div className="media-cont">
-            <Link to="https://twitter.com/TuneTrail" className="social-icon-link" title="Twitter">
+            <Link to="https://twitter.com/TuneTrail" className="social-icon-link" data-tooltip="Twitter">
               <img
                 src="/src/assets/x-icon.png"
                 className="media-svg"
                 alt="Twitter"
               />
             </Link>
-            <Link to=" https://www.instagram.com/tunetrail/" className="social-icon-link" title="Instagram">
+            <Link to=" https://www.instagram.com/tunetrail/" className="social-icon-link" data-tooltip="Instagram">
               <img
                 src="/src/assets/ig-icon.png"
                 className="media-svg"
                 alt="Instagram"
               />
             </Link>
-            <Link to=" https://www.facebook.com/TuneTrail" className="social-icon-link" title="Facebook">
+            <Link to=" https://www.facebook.com/TuneTrail" className="social-icon-link" data-tooltip="Facebook">
               <img
                 src="/src/assets/fb-icon.png"
                 className="media-svg"
@@ -223,17 +221,23 @@ function Landpage() {
 
       <section className="featured">
         <h3 className="featured-title">Featured samples</h3>
-        <div className="tracks">
-          {sampleTracks.map((track) => (
-            <article key={track.id} className="track-card">
-              <div className="track-info">
-                <strong className="track-title">{track.title}</strong>
-                <span className="track-artist">{track.artist}</span>
-              </div>
-              <TrackPlayer src={track.url} title={track.title} />
-            </article>
-          ))}
-        </div>
+        {tracksLoading ? (
+          <p className="loading-text">Loading songs...</p>
+        ) : sampleTracks.length > 0 ? (
+          <div className="tracks">
+            {sampleTracks.map((track) => (
+              <article key={track.id} className="track-card">
+                <div className="track-info">
+                  <strong className="track-title">{track.songTitle}</strong>
+                  <span className="track-artist">{track.artistName}</span>
+                </div>
+                <TrackPlayer src={track.songUrl} title={track.songTitle} />
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p className="no-tracks-text">No songs available at the moment.</p>
+        )}
       </section>
     </div>
   );

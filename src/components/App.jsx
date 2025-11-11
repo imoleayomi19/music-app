@@ -15,7 +15,6 @@ export default function App() {
   const [sortBy, setSortBy] = useState("title");
   const audioRef = useRef(null);
 
-  // Fetch songs from API
   useEffect(() => {
     fetch("https://robo-music-api.onrender.com/music/my-api")
       .then((res) => {
@@ -33,7 +32,6 @@ export default function App() {
       });
   }, []);
 
-  // Update progress and duration
   useEffect(() => {
     if (!audio) return;
     const updateProgress = () => {
@@ -105,7 +103,6 @@ export default function App() {
     });
   };
 
-  // Filter and sort songs
   const filteredSongs = songs
     .filter((song) =>
       `${song.songTitle} ${song.artistName}`
@@ -131,13 +128,12 @@ export default function App() {
   return (
     <div className="app-container">
       <header className="app-header">
-        <h1 className="app-title">🎵 TuneTrail</h1>
+        <h1 className="app-title"> TuneTrail</h1>
         <p className="app-subtitle">Your Music, Your Way</p>
       </header>
 
       {error && <div className="error-banner">{error}</div>}
 
-      {/* Now Playing Section */}
       {playing && audio && (
         <div className="now-playing">
           <div className="now-playing-content">
@@ -159,7 +155,6 @@ export default function App() {
       )}
 
       <div className="music-app">
-        {/* Search and Filter Section */}
         <div className="controls-section">
           <div className="search-box">
             <Search size={18} className="search-icon" />
@@ -198,14 +193,12 @@ export default function App() {
           </div>
         </div>
 
-        {/* Playlist Header */}
         <div className="playlist-header">
           <h2 className="playlist-title">
             Playlist ({filteredSongs.length} songs)
           </h2>
         </div>
 
-        {/* Songs Grid */}
         <div className="songs-grid">
           {filteredSongs.length > 0 ? (
             filteredSongs.map((song) => (

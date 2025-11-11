@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-function TrackPlayer({ src }) {
+function TrackPlayer({ src, title }) {
   const [playing, setPlaying] = useState(false);
   const audioRef = useRef(null);
 
@@ -33,7 +33,13 @@ function TrackPlayer({ src }) {
   };
 
   return (
-    <button className="track-play" onClick={toggle} aria-pressed={playing}>
+    <button 
+      className="track-play" 
+      onClick={toggle} 
+      aria-pressed={playing}
+      title={title}
+      aria-label={`${playing ? 'Pause' : 'Play'} ${title}`}
+    >
       {playing ? "Pause" : "Play"}
     </button>
   );
@@ -113,33 +119,42 @@ function Landpage() {
     <div>
       <div className="head">
         <h1 className="logo">TuneTrail</h1>
-        <div className="right-head">
-          <div className="nav-cont">
-            <nav className="nav-cont">
-              <Link to="/about" className="nav-link">
-                ABOUT
-              </Link>
-              <Link to="/blog" className="nav-link">
-                BLOG
-              </Link>
-              <Link to="/contact" className="nav-link">
-                CONTACT
-              </Link>
-            </nav>
+        <nav className="right-head">
+          <div>
+            <Link to="/about" className="nav-link">
+              ABOUT
+            </Link>
+            <Link to="/blog" className="nav-link">
+              BLOG
+            </Link>
+            <Link to="/contact" className="nav-link">
+              CONTACT
+            </Link>
           </div>
           <div className="media-cont">
-            {/* Social media icons can be added here */}
-            <a href="https://twitter.com/TuneTrail">
-              <img src="/src/assets/x-icon.png"  className="social-link"  aria-label="Twitter"/>
-            </a>
-            <a href=" https://www.instagram.com/tunetrail/" >
-              <img src="/src/assets/ig-icon.png" className="social-link" aria-label="Instagram" />
-            </a>
-            <a href=" https://www.facebook.com/TuneTrail" >
-              <img src="/src/assets/fb-icon.png" className="social-link" aria-label="Facebook" />
-            </a>
+            <Link to="https://twitter.com/TuneTrail" className="social-icon-link" title="Twitter">
+              <img
+                src="/src/assets/x-icon.png"
+                className="media-svg"
+                alt="Twitter"
+              />
+            </Link>
+            <Link to=" https://www.instagram.com/tunetrail/" className="social-icon-link" title="Instagram">
+              <img
+                src="/src/assets/ig-icon.png"
+                className="media-svg"
+                alt="Instagram"
+              />
+            </Link>
+            <Link to=" https://www.facebook.com/TuneTrail" className="social-icon-link" title="Facebook">
+              <img
+                src="/src/assets/fb-icon.png"
+                className="media-svg"
+                alt="Facebook"
+              />
+            </Link>
           </div>
-        </div>
+        </nav>
       </div>
       <main className="hero hero-enhanced" aria-labelledby="hero-title">
         <div className="hero-content">
@@ -215,7 +230,7 @@ function Landpage() {
                 <strong className="track-title">{track.title}</strong>
                 <span className="track-artist">{track.artist}</span>
               </div>
-              <TrackPlayer src={track.url} />
+              <TrackPlayer src={track.url} title={track.title} />
             </article>
           ))}
         </div>
